@@ -1,0 +1,14 @@
+[project]
+name = "complaints-priority-scorer"
+version = "0.1.0"
+description = "API por prioritizing consumer complaints using NLP."
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi",
+    "uvicorn",
+    "scikit-learn",
+    "pandas",
+    "numpy",
+    "joblib"
+]
