@@ -3,7 +3,7 @@ import numpy as np
 from sklearn.model_selection import train_test_split
 
 
-def preprocess_data(file_path='data/consumer_complaints.csv'):
+def preprocess_data(file_path='data/raw_data.csv'):
     df = pd.read_csv(file_path)
 
     df.rename(columns={'Consumer complaint narrative': 'Complaint text'}, inplace=True)
