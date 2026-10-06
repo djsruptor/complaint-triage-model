@@ -1,10 +1,10 @@
 # Consumer Complaint Priority Scoring API
 
-This is a NLP project I built for ranking and prioritizing consumer complaints by their likelihood to require escalation.
+NLP project built for ranking and prioritizing consumer complaints by their likelihood to require escalation.
 
-The model analyzes complaint verbatim from the CFPB Consumer Complaint Database and returns a probability score. The idea is to support customer service workflows, so limited workforce can focus on the complaints most likely to need attention.
+The model analyzes complaint text from the CFPB Consumer Complaint Database and returns a probability score. The idea is to support customer service workflows, so the limited workforce can focus on the complaints most likely to need attention.
 
-I built the project following the CRISP-DM framework, to collect enough business-driven grounds before developing a technical solution with a proper architecture and governance.
+I used the CRISP-DM framework to define the business problem and target before moving into modeling and deployment.
 
 ## 1. Business Context
 
@@ -39,8 +39,6 @@ A complaint is labeled as high priority if either:
 
 - the company did not respond in a timely manner
 - the consumer explicitly disputed the company’s response
-
-This definition reflects operational and regulatory risk, not just customer sentiment.
 
 
 ## 2. Data Understanding
@@ -166,7 +164,7 @@ Example response:
 ```
 
 ### 5.2 Containerization
-The project follows a production-first Docker design, prioritizing stability and efficiency. By keeping the heavy training process outside of the container, we ensure that the image remains lightweight and that the production environment is strictly for serving predictions. During the build process, the model artifact that was previously trained offline is copied directly into the image, creating an immutable environment that can be deployed anywhere.
+Training happens outside the container. The trained `pipeline.joblib` artifact is copied into the image at build time, so the container is used only for inference.
 
 To get the service running locally, you can build and launch the container using the following commands:
 
@@ -193,7 +191,7 @@ Live Endpoint: `POST https://cfpb-complaints-priority-scorer.fly.dev`
 
 
 ## 6. Future Improvements
-The current version provides a strong baseline, but it is intentionally simple. A more realistic version would probably distinguish between kinds of escalation instead of treating prioritization as binary.
+Current version is intentionally simple. A more realistic version would probably distinguish between kinds of escalation instead of treating prioritization as binary.
 
 Some of the possible next steps would be:
 - active learning
